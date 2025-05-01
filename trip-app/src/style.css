@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Special+Gothic+Condensed+One&family=Winky+Rough:ital,wght@0,300..900;1,300..900&display=swap");
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+header {
+    font-family: "Monoton", sans-serif;
+    font-weight: 400;
+    background-color: #f4a226;
+    padding: 1px 0px;
+    font-size: 30px;
+    text-align: center;
+    color: #5a3e2b;
+}
+
+.form-container{
+    background-color: #e5771f;
+    padding: 10px 0px;
+    text-align: center;
+    color: #5a3e2b;
+}
+
+.list {
+    background-color: #5a3e2b;
+    min-height: 600px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+
+footer {
+    background-color: #76c7ad;
+    color: #5a3e2b;
+    padding: 13px 0px;
+    text-align: center;
+}
+
