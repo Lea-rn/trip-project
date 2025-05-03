@@ -39,3 +39,63 @@ footer {
     text-align: center;
 }
 
+.element {
+    margin-left: 150px;
+    margin-right: 10px;
+    font-weight: bold;
+  
+}
+
+
+.list{
+
+    padding: 50px;
+    display: flex;
+    justify-content: start;
+
+
+}
+
+.btn-delete{
+    cursor: pointer;
+}
+.form-container {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+.form-element{
+
+    margin-left: 50px;
+}
+
+.form-element select , button , input {
+    margin-left: 10px;
+    
+}
+
+.form-element select , input {
+    padding: 6px 15px;
+    border-radius: 10px;
+    border: transparent;
+    background-color: #ffebb3;
+    
+}
+
+.form-element button {
+    background-color: #76c7ad;
+    color: #5a3e2b;
+    padding: 6px 15px;
+    border-radius: 10px;
+    border: transparent;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 1s;
+
+}
+
+.form-element button:hover {
+    background-color: #29ba8c;
+
+}
+
