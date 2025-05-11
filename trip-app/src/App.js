@@ -15,11 +15,24 @@ const initialItems = [
 ];
 
 function App() {
+
+    const [items, setItems] = useState([]);
+    
+
+    
+      function handleAddItems(obj) {
+    setItems((cur) => [...cur, obj]);
+  }
+
+  function handleDeleteitems (id){
+   setItems(()=>items.filter((ele)=> ele.id !== id))
+  }
+
   return (
     <div>
-      <Logo />
-      <Form />
-      <PackingList />
+      <Logo  />
+      <Form  onAddItems = {handleAddItems} />
+      <PackingList  items={items} onDeleteItem={handleDeleteitems} />
       <Stats />
     </div>
   );
@@ -33,14 +46,31 @@ function Logo() {
   );
 }
 
-function Form() {
+//// function essem ()  {     } /// declaration
+
+///// const essem = function (){} /// expression
+//// const essem = ()=> {}  /// arrow function
+
+// function hello (){
+//   console.log("hello")
+// }
+
+// const hello = function (){
+//   console.log("hello")
+// }
+
+// const hello = ()=> console.log("hello")
+
+function Form({onAddItems}) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
+
+
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (!description) return ; 
+    if (!description) return;
     const newItem = {
       description: description,
       quantity: quantity,
@@ -48,10 +78,11 @@ function Form() {
       id: Date.now(),
     };
 
-    console.log(newItem);
+   onAddItems(newItem);
 
-    setDescription("")
-    setQuantity("")
+
+    setDescription("");
+    setQuantity(1);
   }
 
   return (
@@ -68,7 +99,7 @@ function Form() {
             </option>
           ))}
         </select>
-{/* 
+        {/* 
         <input  placeholder="quantity ..." type="number" value={quantity} onChange={(e)=>setQuantity(Number(e.target.value))}/> */}
         <input
           placeholder="item..."
@@ -82,24 +113,25 @@ function Form() {
   );
 }
 
-function PackingList() {
+function PackingList({items , onDeleteItem}) {
   return (
     <div className="list">
-      {initialItems.map((item) => (
-        <Item key={item.id} obj={item} />
+      {items.map((item) => (
+        <Item key={item.id} obj={item} onDeleteItem={onDeleteItem} />
       ))}
     </div>
   );
 }
 
-function Item({ obj }) {
+function Item({ obj , onDeleteItem }) {
+
   return (
     <div>
       <span className="element">{obj.quantity}</span>
       <span style={obj.packed ? { textDecoration: "line-through" } : {}}>
         {obj.description}
       </span>
-      <span className="btn-delete">❌</span>
+      <span onClick={()=>onDeleteItem(obj.id)}  className="btn-delete">❌</span>
     </div>
   );
 }
