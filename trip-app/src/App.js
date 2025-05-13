@@ -2,38 +2,42 @@ import { useState } from "react";
 import "./App.css";
 import "./style.css";
 
-const initialItems = [
-  {
-    id: 1,
-    description: "Passports",
-    quantity: 1,
-    packed: false,
-  },
-
-  { id: 2, description: "Socks", quantity: 12, packed: false },
-  { id: 3, description: "charger", quantity: 1, packed: true },
-];
-
 function App() {
+  const [items, setItems] = useState([]);
 
-    const [items, setItems] = useState([]);
-    
 
-    
-      function handleAddItems(obj) {
+
+
+  function handleAddItems(obj) {
     setItems((cur) => [...cur, obj]);
+
   }
 
-  function handleDeleteitems (id){
-   setItems(()=>items.filter((ele)=> ele.id !== id))
+  function handleDeleteitems(id) {
+    setItems(() => items.filter((ele) => ele.id !== id));
   }
+
+  function handleToggleItem(id) {
+    setItems(() =>
+      items.map((item ) =>
+        item.id === id ? { ...item, packed: !item.packed  } : item
+      )
+    );
+  }
+
+
+  //// spread operator ... 
 
   return (
     <div>
-      <Logo  />
-      <Form  onAddItems = {handleAddItems} />
-      <PackingList  items={items} onDeleteItem={handleDeleteitems} />
-      <Stats />
+      <Logo />
+      <Form onAddItems={handleAddItems} />
+      <PackingList
+        items={items}
+        onDeleteItem={handleDeleteitems}
+        onToggleItem={handleToggleItem}
+      />
+      <Stats  items={items} />
     </div>
   );
 }
@@ -61,11 +65,9 @@ function Logo() {
 
 // const hello = ()=> console.log("hello")
 
-function Form({onAddItems}) {
+function Form({ onAddItems }) {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
-
-
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -78,8 +80,7 @@ function Form({onAddItems}) {
       id: Date.now(),
     };
 
-   onAddItems(newItem);
-
+    onAddItems(newItem);
 
     setDescription("");
     setQuantity(1);
@@ -113,34 +114,52 @@ function Form({onAddItems}) {
   );
 }
 
-function PackingList({items , onDeleteItem}) {
+function PackingList({ items, onDeleteItem, onToggleItem }) {
   return (
     <div className="list">
       {items.map((item) => (
-        <Item key={item.id} obj={item} onDeleteItem={onDeleteItem} />
+        <Item
+          key={item.id}
+          obj={item}
+          onDeleteItem={onDeleteItem}
+          onToggleItem={onToggleItem}
+        />
       ))}
     </div>
   );
 }
 
-function Item({ obj , onDeleteItem }) {
-
+function Item({ obj, onDeleteItem, onToggleItem }) {
   return (
-    <div>
+    <div className="item-container">
+      <input
+        className="test"
+        type="checkbox"
+        value={obj.packed}
+        onChange={() => onToggleItem(obj.id)}
+      />
       <span className="element">{obj.quantity}</span>
       <span style={obj.packed ? { textDecoration: "line-through" } : {}}>
         {obj.description}
       </span>
-      <span onClick={()=>onDeleteItem(obj.id)}  className="btn-delete">❌</span>
+      <span onClick={() => onDeleteItem(obj.id)} className="btn-delete">
+        ❌
+      </span>
     </div>
   );
 }
 
-function Stats() {
+function Stats({items}) {
+    const numItems = items.length
+    const numPacked = items.filter((item)=> item.packed === true).length
+    const percentage = Math.round((numPacked/numItems) * 100 )
   return (
     <footer>
       <strong>
-        🎒 You have X items on your list , and you already packed X (%X)
+        {percentage === 100 ? "you got everything !!  ready to go 🛬" : `
+          🎒 You have ${numItems} items on your list , and you already packed ${numPacked} (${percentage}%)
+        `}
+      
       </strong>
     </footer>
   );
