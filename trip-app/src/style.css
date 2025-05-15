@@ -4,6 +4,7 @@
 body {
     margin: 0px;
     padding: 0px;
+    height: 600px;
 }
 
 
@@ -25,11 +26,15 @@ header {
 }
 
 .list {
-    background-color: #5a3e2b;
-    min-height: 600px;
+
+    height: 200px;
     text-align: center;
     color: white;
     font-size: 20px;
+    display: flex;
+    flex-wrap: wrap;
+ 
+  
 }
 
 footer {
@@ -47,14 +52,7 @@ footer {
 }
 
 
-.list{
 
-    padding: 50px;
-    display: flex;
-    justify-content: start;
-
-
-}
 
 .btn-delete{
     cursor: pointer;
@@ -107,4 +105,42 @@ accent-color:#ffebb3 ;
 
 .item-container{
     margin-left: 80px;
+    display: flex;
+    align-items: center;
+    
+}
+
+
+.actions  {
+    height: 100px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+   margin-top: 200px;
+   text-align: center;
+   
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.app{
+    background-color: #5a3e2b;
+}
+
+.actions select {
+    background-color: #ffebb3;
+    padding: 7px;
+    border-radius: 10px;
+    border: transparent;
+       cursor: pointer;
+
+}
+.actions button {
+    background-color: #ffebb3;
+        padding: 7px;
+         border-radius: 10px;
+    border: transparent;
+    cursor: pointer;
 }
